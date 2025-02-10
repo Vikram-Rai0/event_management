@@ -1,6 +1,6 @@
 import { db } from "../database/db_config.js";
 
-export const event = (req, res) => {
+export const event = async(req, res) => {
   try {
     const {
       organizer_id,
@@ -40,7 +40,7 @@ export const event = (req, res) => {
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     // Execute the query with parameters
-    const result = db.execute(insertEventQuery, [
+    const result = await db.execute(insertEventQuery, [
       organizer_id,
       title,
       description,

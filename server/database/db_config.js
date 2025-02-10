@@ -1,16 +1,19 @@
-import mysql2 from "mysql2";
+import mysql from "mysql2/promise"; // Use promise-based MySQL
 
-export const db = mysql2.createConnection({
+export const db = await mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "1234567890",
   database: "event_database",
 });
 
-db.connect((err) => {
-  if (err) {
-    console.log("database connection failed...", err);
-  } else {
-    console.log("Database connection successfull");
-  }
-});
+console.log("Database connection successful");
+
+// Optional: Test the connection
+try {
+  await db.ping();
+  console.log("Database is responsive");
+} catch (error) {
+  console.error("Database connection failed:", error);
+}
+

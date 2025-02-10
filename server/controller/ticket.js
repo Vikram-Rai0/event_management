@@ -14,7 +14,7 @@ export const tickets = async (req, res) => {
       "INSERT INTO tickets (`event_id`, `user_id`, `ticket_price`, `qr_code`) VALUES (?, ?, ?, ?)";
 
     // Execute the query with parameters
-    const result = db.execute(insertTicketQuery, [
+    const result = await db.execute(insertTicketQuery, [
       event_id,
       user_id,
       ticket_price,
