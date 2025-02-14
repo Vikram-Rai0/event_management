@@ -2,7 +2,7 @@ import { db } from "../database/db_config.js";
 
 export const reviews = async (req, res) => {
   try {
-    const { event_id, user_id, rating, comment } = req.body;
+    const { event_id, user_id, rating, comment } = req.body; 
     if (!event_id || !user_id)
       return res
         .status(401)
