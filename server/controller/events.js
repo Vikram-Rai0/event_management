@@ -12,6 +12,7 @@ const storage = multer.diskStorage({
       null,
       file.fieldname + "-" + uniqueName + path.extname(file.originalname)
     ); //unique file name with orginal file name
+    console.log(uniqueName);
   },
 });
 const fileFilter = (req, file, cb) => {
@@ -34,11 +35,11 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 }, // 5mb file size
 });
 // Middleware to handle file upload
-export const uploadFile = upload.single("event_image");// 'event_image' is the field name for the file
+export const uploadFile = upload.single("event_image"); // 'event_image' is the field name for the file
 
 export const event = async (req, res) => {
   try {
-     const event_image=req.file ? req.file.filename:null;
+    const event_image = req.file ? req.file.filename : null;
     const {
       organizer_id,
       title,
@@ -51,16 +52,15 @@ export const event = async (req, res) => {
       available_tickets,
       is_private,
     } = req.body;
-
    
-  
-    console.log("Request Body:", req.body);
+
+    console.log("Request Body:",req.file, req.body);
 
     // Validate required fields
     if (
       !organizer_id ||
       !title ||
-      !event_image||
+      !event_image ||
       !description ||
       !category ||
       !location ||
@@ -70,14 +70,13 @@ export const event = async (req, res) => {
       available_tickets === undefined ||
       is_private === undefined
     ) {
-      return res.status(400).json({ message: "Missing required fields" });
-    }
+      return res.status(400).json({ message: "Missing required fields" });}
 
     // SQL query to insert event
     const insertEventQuery = `
       INSERT INTO events 
-      (organizer_id, title, event_image,description, category, location, date_time, ticket_price, total_tickets, available_tickets, is_private)
-      VALUES (?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?)`;
+      (organizer_id, title,event_image,description, category, location, date_time, ticket_price, total_tickets, available_tickets, is_private)
+      VALUES (?,?,?,?,?,?,?,?,?,?,?)`;
 
     // Execute the query with parameters
     const result = await db.execute(insertEventQuery, [
