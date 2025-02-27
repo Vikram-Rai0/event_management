@@ -52,9 +52,8 @@ export const event = async (req, res) => {
       available_tickets,
       is_private,
     } = req.body;
-   
 
-    console.log("Request Body:",req.file, req.body);
+    console.log("Request Body:", req.file, req.body);
 
     // Validate required fields
     if (
@@ -70,7 +69,8 @@ export const event = async (req, res) => {
       available_tickets === undefined ||
       is_private === undefined
     ) {
-      return res.status(400).json({ message: "Missing required fields" });}
+      return res.status(400).json({ message: "Missing required fields" });
+    }
 
     // SQL query to insert event
     const insertEventQuery = `

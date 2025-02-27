@@ -28,7 +28,7 @@ const UserSignup = () => {
         try {
             const response = await axios.post(apiUrl, data);
             console.log("Signup successful:", response.data);
-             
+
             setData({
                 name: "",
                 email: "",
@@ -65,12 +65,9 @@ const UserSignup = () => {
                 <div className="formContainer  w-[60%]  flex flex-col justify-center items-center relative">
                     <i className="fa-solid fa-xmark text-[large] absolute top-1.5 right-2"></i>
 
-                    <h1 className="font-extrabold text-2xl m-5 ">Sign Up</h1>
+                    <h1 className="font-extrabold text-2xl m-5 ">Login</h1>
                     <form action="" className="  grid  " onSubmit={handleSubmit}>
-                        <div className="usernameContainer  relative ">
-                            <i className="fa-solid fa-user absolute  bottom-3.5 text-sm mb-0.5"></i>
-                            <input type="text" placeholder="Username" name="name" value={data.name} onChange={handleChange} className="border-b-2 border-solid border-black  text-sm focus:outline-none my-2.5 w-[20vw] pl-5 " />
-                        </div>
+
 
                         <div className="emailContainer relative">
                             <i className="fa-solid fa-envelope text-1xl absolute  bottom-3.5 text-sm mb-0.5"></i>
@@ -80,17 +77,7 @@ const UserSignup = () => {
                             <i className="fa-solid fa-lock absolute  bottom-3.5 text-sm mb-0.5"></i>
                             <input type="password" placeholder="Password" name="password_hash" value={data.password_hash} onChange={handleChange} className="border-b-2 border-solid text-sm border-black focus:outline-none my-2.5  w-[20vw] pl-5  " />
                         </div>
-                        <div className="roleContainer relative">
-                            <i className="fa-solid fa-users absolute  bottom-3 text-sm mb-0.5"></i>
-                            <select name="type" id="" value={data.type} onChange={handleChange} className="text-[#7D7D91] border-b-2 border-solid  focus:outline-none w-[100%] my-2.5 pl-5 ">
-                                <option value="" disabled selected className="  ">Select Role</option>
-                                <option value="attendee">Attendee</option>
-                                <option value="orginizer">Orginizer</option>
-                            </select></div>
-                        <div className="phonenumberContainer relative">
-                            <i className="fa-solid fa-phone absolute  bottom-3.5 text-sm mb-0.5"></i>
-                            <input type="text" placeholder="Phone number" name="phone" value={data.phone} onChange={handleChange} className="border-b-2 border-solid border-black text-sm focus:outline-none my-2.5 w-[20vw] pl-5 " />
-                        </div>
+
                         <div className="buttonContainer w-full flex justify-center">
 
                             <button type="submit" className="w-[95%] text-white mt-2 rounded-4xl h-8 bg-gradient-to-r from-[#197089] to-[#03988c]">Submit</button>

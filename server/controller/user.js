@@ -2,10 +2,10 @@ import { db } from "../database/db_config.js";
 
 export const users = async (req, res) => {
   try {
-    const { name, email, password_hash, role, phone } = req.body;
+    const { name, email, password_hash, type, phone } = req.body;
 
     // Validate input fields
-    if (!name || !email || !password_hash || !role || !phone) {
+    if (!name || !email || !password_hash || !type || !phone) {
       return res
         .status(400)
         .json({ message: "Please fill in all required fields!" });
@@ -31,17 +31,15 @@ export const users = async (req, res) => {
       name,
       email,
       password_hash,
-      role,
+      type,
       phone,
     ]);
 
     console.log("Inserted Data:", result);
-    res
-      .status(201)
-      .json({
-        message: "User registered successfully",
-        userId: result.insertId,
-      });
+    res.status(201).json({
+      message: "User registered successfully",
+      userId: result.insertId,
+    });
   } catch (error) {
     console.error("Database Error:", error);
     res.status(500).json({ message: "Database error", error: error.message });
